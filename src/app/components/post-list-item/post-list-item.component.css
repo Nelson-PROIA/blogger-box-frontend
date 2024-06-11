@@ -1,0 +1,6 @@
+/**
+ * Styles for the post container when hovered.
+ */
+ .post-container:hover {
+    background-color: rgb(240, 240, 240);
+}

@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Post } from '../data/post';
+import { Post, PostCreation, PostWithoutCreatedDate } from '../data/post';
 import { environment } from '../environments/environment';
 
 /**
@@ -66,8 +66,8 @@ export class PostService {
    * @param {string} postCategoryId - Category ID of the new post.
    * @returns {Observable<Post>} - Observable containing the created post.
    */
-  createPost(postTitle: string, postContent: string, postCategoryId: string): Observable<Post> {
-    const body = { postTitle, postContent, postCategoryId };
+  createPost(post: PostCreation): Observable<Post> {
+    const body = post;
 
     return this.http.post<Post>(this.postsURL, body)
       .pipe(
@@ -84,10 +84,10 @@ export class PostService {
    * @param {string} postCategoryId - Updated category ID of the post.
    * @returns {Observable<Post>} - Observable containing the updated post.
    */
-  updatePost(id: string, postTitle: string, postContent: string, postCategoryId: string): Observable<Post> {
-    const body = { postTitle, postContent, postCategoryId };
+  updatePost(post: PostWithoutCreatedDate): Observable<Post> {
+    const body = { title: post.title, content: post.content, categoryId: post.categoryId };
 
-    return this.http.put<Post>(`${this.postsURL}/${id}`, body)
+    return this.http.put<Post>(`${this.postsURL}/${post.id}`, body)
       .pipe(
         catchError(this.handleError<Post>('updatePost'))
       );

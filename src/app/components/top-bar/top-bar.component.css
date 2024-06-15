@@ -16,16 +16,23 @@
 /**
  * Styles for the navbar write button.
  */
-.navbar-write-button {
+.navbar-categories-button,
+.navbar-write-button,
+.navbar-home-button {
     color: #737373;
+	gap: 0.25em;
+	border: none;
+
 }
 
 /**
  * Hover styles for the navbar write button.
  */
-.navbar-write-button:hover {
+.navbar-categories-button:hover,
+.navbar-write-button:hover,
+.navbar-home-button:hover {
     color: #414141;
-    animation: shake 1.25s ease-out 0s 1 normal none;
+	animation: shake 1.4s ease-out 0s 1 normal none;
 }
 
 /**

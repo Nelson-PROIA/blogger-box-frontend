@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Category } from '../data/category';
+import { Category, CategoryWithoutId } from '../data/category';
 import { Post } from '../data/post';
 import { environment } from '../environments/environment';
 
@@ -65,9 +65,9 @@ export class CategoryService {
    * @param {string} categoryName The name of the new category.
    * @returns {Observable<Category>} Observable containing the created category.
    */
-  createCategory(categoryName: string): Observable<Category> {
-    const body = { categoryName };
-
+  createCategory(category: CategoryWithoutId): Observable<Category> {
+    const body = { name: category.name };
+    
     return this.http.post<Category>(this.categoriesURL, body)
       .pipe(
         catchError(this.handleError<Category>('createCategory'))
@@ -81,10 +81,10 @@ export class CategoryService {
    * @param {string} categoryName The new name of the category.
    * @returns {Observable<Category>} Observable containing the updated category.
    */
-  updateCategory(id: string, categoryName: string): Observable<Category> {
-    const body = { categoryName };
+  updateCategory(category: Category): Observable<Category> {
+    const body = { name: category.name };
 
-    return this.http.patch<Category>(`${this.categoriesURL}/${id}`, body)
+    return this.http.put<Category>(`${this.categoriesURL}/${category.id}`, body)
       .pipe(
         catchError(this.handleError<Category>('updateCategory'))
       );
@@ -99,7 +99,10 @@ export class CategoryService {
   deleteCategory(id: string): Observable<void> {
     return this.http.delete<void>(`${this.categoriesURL}/${id}`)
       .pipe(
-        catchError(this.handleError<void>('deleteCategory'))
+        catchError((error: HttpErrorResponse) => {
+          console.error('Delete category failed:', error);
+          return throwError(error); // Throw the entire HttpErrorResponse
+        })
       );
   }
 

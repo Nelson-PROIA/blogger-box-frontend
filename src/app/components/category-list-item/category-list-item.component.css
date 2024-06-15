@@ -1,0 +1,30 @@
+/**
+ * Styles for the post container when hovered.
+ */
+ .category-container:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+.category-container:hover .icon-container {
+    visibility: visible;
+}
+
+.icon-container {
+    visibility: hidden;
+    gap: 0.75rem;
+}
+
+.edit-icon, .delete-icon {
+    cursor: pointer;
+    color: #737373;
+    font-size: 1.25rem;
+}
+
+.edit-icon:hover {
+    color: #414141;
+}
+
+.delete-icon:hover {
+    color: #df2b2b;
+}
+

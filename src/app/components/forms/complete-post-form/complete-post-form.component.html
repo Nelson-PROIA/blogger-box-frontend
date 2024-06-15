@@ -1,0 +1,42 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="titleInput" class="form-label">Title</label>
+      <input type="text" id="titleInput" formControlName="title" class="form-control"
+             [ngClass]="{ 'is-invalid': title.invalid && (title.dirty || title.touched),
+                          'is-valid': title.valid && (title.dirty || title.touched) }">
+      <div *ngIf="title?.invalid && (title?.dirty || title?.touched)" class="invalid-feedback">
+        <div *ngIf="title?.errors?.['required']">Title is required.</div>
+        <div *ngIf="title?.errors?.['minlength']">Title must be at least 5 characters long.</div>
+        <div *ngIf="title?.errors?.['maxlength']">Title cannot exceed 150 characters.</div>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="categoryInput" class="form-label">Category</label>
+      <input type="text" id="categoryInput" formControlName="category" class="form-control" list="categoryOptions"
+             [ngClass]="{ 'is-invalid': category.invalid && (category.dirty || category.touched),
+                          'is-valid': category.valid && (category.dirty || category.touched) }">
+      <datalist id="categoryOptions">
+        <option *ngFor="let category of categories" [value]="category.name"></option>
+      </datalist>
+      <div *ngIf="category?.invalid && (category?.dirty || category?.touched)" class="invalid-feedback">
+        <div *ngIf="category.errors?.['required']">Category is required.</div>
+      </div>
+      <small *ngIf="category?.value && !isExistingCategory()" class="form-text text-primary">
+        '{{ category.value }}' category will be added to the database when posting.
+      </small>
+    </div>
+  
+    <div class="mb-3">
+      <label for="contentInput" class="form-label">Content</label>
+      <textarea id="contentInput" formControlName="content" class="form-control no-resize"
+                [ngClass]="{ 'is-invalid': content.invalid && (content.dirty || content.touched),
+                             'is-valid': content.valid && (content.dirty || content.touched) }"
+                rows="6"></textarea>
+      <div *ngIf="content?.invalid && (content?.dirty || content?.touched)" class="invalid-feedback">
+        <div *ngIf="content?.errors?.['required']">Content is required.</div>
+        <div *ngIf="content?.errors?.['maxlength']">Content cannot exceed 2500 characters.</div>
+      </div>
+    </div>  
+  </form>
+  

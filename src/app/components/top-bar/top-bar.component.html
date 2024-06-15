@@ -5,10 +5,21 @@
             <span>Blogger-Box</span>
         </a>
 
-        <form class="d-flex">
-            <button class="btn btn-lg navbar-write-button" type="button">
-                <i class="bi bi-pencil-square"></i> Write
+        <div class="d-flex">
+          <button *ngIf="currentRoute !== '/categories'" class="btn btn-lg d-flex navbar-categories-button" type="button" (click)="goToCategories()">
+            <span>Categories</span>
+          </button>
+  
+          <button *ngIf="currentRoute !== '/write-post'" class="btn btn-lg navbar-write-button d-flex align-items-center" type="button" (click)="goToWritePost()">
+              <i class="bi bi-pencil-square"></i>
+              <span>Write</span>
             </button>
-        </form>
+  
+            <button *ngIf="isNotPostsRoute()" class="btn btn-lg navbar-home-button d-flex align-items-center" type="button" (click)="goToHome()">
+              <i class="bi bi-house-door"></i>
+              <span>Home</span>
+            </button>
+        </div>
+        
     </div>
 </nav>

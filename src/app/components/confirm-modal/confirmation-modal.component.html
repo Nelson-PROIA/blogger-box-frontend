@@ -1,0 +1,16 @@
+<div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" data-backdrop="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold m-0">{{ title }}</h5>
+      </div>
+      <div class="modal-body">
+        {{ message }}
+      </div>
+      <div class="modal-footer border-0 pt-0">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-bs-target="#confirmation-modal" (click)="cancel()">Cancel</button>
+        <button id="confirmation-modal-confirm-button" type="button" class="btn" [ngClass]="{'btn-danger': buttonType === 'danger', 'btn-success': buttonType === 'sucess'}" data-bs-dismiss="modal" data-bs-target="#confirmation-modal" (click)="confirm()">{{ confirmationButtonText }}</button>
+      </div>
+    </div>
+  </div>
+</div>

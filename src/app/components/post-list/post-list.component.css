@@ -1,0 +1,22 @@
+  .scroll-icon {
+    opacity: 0.8;
+    transition: opacity 0.2s ease-in-out;
+    cursor: pointer;
+    color: #000000;
+  }
+
+  .scroll-icon:hover {
+    opacity: 1;
+  }
+
+  .scrollers {
+    gap: 5px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  .category-filter {
+    gap: 10px;
+  }

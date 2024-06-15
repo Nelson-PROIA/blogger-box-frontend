@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h5 class="modal-title fw-bold m-0">Edit post</h5>
+</div>
+<div class="modal-body">
+    <div class="form-group mb-3">
+        <label class="form-label" for="postId">Post ID</label>
+        <div id="postId" class="form-control readonly-field">{{ initialData.id }}</div>
+      </div>
+      <div class="form-group mb-3">
+        <label class="form-label" for="createdDate">Created date</label>
+        <div id="createdDate" class="form-control readonly-field">{{ initialData.createdDate }}</div>
+      </div>
+    <app-complete-post-form [initialData]="initialData" (formSubmit)="submitForm($event)"></app-complete-post-form>
+    
+</div>
+<div class="modal-footer border-0 pt-0">
+    <button type="button" class="btn btn-light" (click)="exit()">Cancel</button>
+    <button type="submit" class="btn btn-success post-button" (click)="triggerFormSubmit()">Save Changes</button>
+</div>

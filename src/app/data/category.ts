@@ -2,6 +2,7 @@
  * Interface representing a category.
  */
 export interface Category {
+  
   /** 
    * The ID of the category. 
    */
@@ -13,3 +14,5 @@ export interface Category {
   name: string;
   
 }
+
+export type CategoryWithoutId = Omit<Category, 'id'>;

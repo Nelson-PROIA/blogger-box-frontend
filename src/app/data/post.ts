@@ -4,6 +4,7 @@ import { Category } from "./category";
  * Interface representing a post.
  */
 export interface Post {
+
     /** 
      * The ID of the post. 
      */
@@ -30,3 +31,11 @@ export interface Post {
     category: Category;
     
 }
+
+export type PostWithoutCreatedDate = Omit<Post, 'createdDate' | 'category'> & {
+    categoryId: string
+};
+
+export type PostCreation = Omit<Post, 'id' | 'createdDate' | 'category'> & {
+    categoryId: string
+};
